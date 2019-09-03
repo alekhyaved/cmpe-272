@@ -1,0 +1,21 @@
+---
+# Deploy a simple web server
+
+- hosts: webservers
+  remote_user: ubuntu
+  become: yes
+  become_method: sudo
+  vars:
+    - http_port: 80
+    - MyMessage: "Hello Chargers"
+  tasks:
+    - name: ensure apache installed
+      apt: name=apache2 update_cache=yes state=latest
+    - name: copy html
+      template:
+        src: ~/playbooks/index.html.j2
+        dest: /var/www/html/index.html
+        owner: ubuntu
+        group: ubuntu
+        mode: 0755
+
