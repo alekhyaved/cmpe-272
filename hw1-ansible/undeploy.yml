@@ -1,0 +1,13 @@
+---
+# Undeploy resources on web server
+
+- hosts: webservers
+  remote_user: ubuntu
+  become: yes
+  become_method: sudo  
+  
+  tasks:
+    - name: Remove index.html file in html folder
+      file:
+        path: /var/www/html/index.html
+        state: absent

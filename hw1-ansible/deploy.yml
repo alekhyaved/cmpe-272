@@ -6,12 +6,15 @@
   become: yes
   become_method: sudo
   vars:
-    - http_port: 80
-    - MyMessage: "Hello Chargers"
+    - MyMessage: "Hello World from Chargers"
   tasks:
-    - name: ensure apache installed
+    - name: Ensure apache installed
       apt: name=apache2 update_cache=yes state=latest
-    - name: copy html
+    - name: Create html folder if not existing
+      file:
+        path: /var/www/html/
+        state: directory
+    - name: Copy html file to web server
       template:
         src: ./index.html.j2
         dest: /var/www/html/index.html
