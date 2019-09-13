@@ -5,4 +5,4 @@
 
     tasks:
     -   name: uninstall apache
-        yum: pkg=httpd state=removed
+        apt: pkg=httpd state=absent
